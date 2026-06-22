@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Đăng Ký</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Space Grotesk',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#38bdf8;
+overflow:hidden;
+}
+
+.card{
+width:450px;
+background:white;
+border:4px solid black;
+border-radius:20px;
+padding:40px;
+box-shadow:12px 12px 0 black;
+}
+
+.badge{
+display:inline-block;
+padding:10px 20px;
+border:3px solid black;
+border-radius:999px;
+background:#fef08a;
+font-weight:700;
+margin-bottom:25px;
+box-shadow:4px 4px 0 black;
+}
+
+h1{
+font-size:2.5rem;
+margin-bottom:25px;
+}
+
+.input-group{
+margin-bottom:18px;
+}
+
+input{
+width:100%;
+padding:15px;
+border:3px solid black;
+border-radius:10px;
+background:#f5f5f5;
+font-size:16px;
+font-weight:600;
+box-shadow:4px 4px 0 black;
+transition:.2s;
+}
+
+input:focus{
+background:white;
+transform:translate(2px,2px);
+box-shadow:2px 2px 0 black;
+outline:none;
+}
+
+.register-btn{
+width:100%;
+padding:15px;
+border:none;
+cursor:pointer;
+border:3px solid black;
+border-radius:10px;
+background:#22c55e;
+font-size:18px;
+font-weight:700;
+box-shadow:6px 6px 0 black;
+transition:.2s;
+}
+
+.register-btn:hover{
+background:#4ade80;
+}
+
+.register-btn:active{
+transform:translate(4px,4px);
+box-shadow:2px 2px 0 black;
+}
+
+.bottom{
+text-align:center;
+margin-top:25px;
+font-weight:600;
+}
+
+.bottom a{
+color:black;
+font-weight:700;
+text-decoration:underline;
+}
+
+.bottom a:hover{
+color:#2563eb;
+}
+
+body.page-exit{
+animation:fadeOut .35s forwards;
+}
+
+@keyframes fadeOut{
+to{
+opacity:0;
+transform:translateY(-20px);
+}
+}
+.error-box{
+background:#ff7b7b;
+border:3px solid black;
+padding:12px;
+margin-bottom:20px;
+border-radius:10px;
+font-weight:700;
+box-shadow:4px 4px 0 black;
+}
+</style>
+</head>
+
+<body>
+<div
+th:if="${param.error}"
+class="error-box">
+
+Email đã tồn tại !
+</div>
+
+<div class="card">
+
+<div class="badge">
+🚀 TẠO TÀI KHOẢN MỚI
+</div>
+
+<h1>Đăng Ký</h1>
+
+<form action="/register" method="post">
+
+<div class="input-group">
+<input
+type="text"
+name="username"
+placeholder="Tên người dùng"
+required>
+</div>
+
+<div class="input-group">
+<input
+type="email"
+name="email"
+placeholder="Email"
+required>
+</div>
+
+<div class="input-group">
+<input
+type="password"
+name="password"
+placeholder="Mật khẩu"
+required>
+</div>
+
+<button class="register-btn">
+TẠO TÀI KHOẢN ✨
+</button>
+
+</form>
+
+<div class="bottom">
+Đã có tài khoản?
+
+<a href="/login">
+Đăng nhập
+</a>
+</div>
+
+</div>
+
+<script>
+
+gsap.from(".card",{
+y:60,
+opacity:0,
+duration:.8,
+ease:"back.out(1.7)"
+});
+
+document.querySelectorAll("a").forEach(link=>{
+
+link.addEventListener("click",function(e){
+
+e.preventDefault();
+
+let href=this.href;
+
+document.body.classList.add("page-exit");
+
+setTimeout(()=>{
+window.location.href=href;
+},300);
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
